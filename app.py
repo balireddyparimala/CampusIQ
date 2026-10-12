@@ -37,7 +37,6 @@ def load_student_data(file_path):
 
     # Load academic risk severity from risk analysis results
     risk_file = PROJECT_DIR / "processed" / "student_risk_analysis.csv"
-
     if risk_file.exists():
         risk_data = pd.read_csv(risk_file)
 
@@ -48,16 +47,17 @@ def load_student_data(file_path):
                 how="left"
             )
 
-    if "academic_risk_severity" not in df.columns:
-    if "academic_risk" in df.columns:
-        df["academic_risk_severity"] = df["academic_risk"].map(
-            {
-                "At Risk": "Moderate Risk",
-                "Low Risk": "Low Risk",
-            }
-        ).fillna("Not Available")
-    else:
-        df["academic_risk_severity"] = "Not Available"
+        if "academic_risk_severity" not in df.columns:
+            if "academic_risk" in df.columns:
+                df["academic_risk_severity"] = df["academic_risk"].map(
+                    {
+                        "At Risk": "Moderate Risk",
+                        "Low Risk": "Low Risk",
+                    }
+                ).fillna("Not Available")
+            else:
+                df["academic_risk_severity"] = "Not Available"
+
     return df
 
 
