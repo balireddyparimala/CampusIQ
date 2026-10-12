@@ -56,7 +56,28 @@ students["academic_risk"] = students[
 ].apply(
     lambda reasons: "At Risk" if reasons else "Low Risk"
 )
+# -----------------------------------------
+# 3A. CLASSIFY ACADEMIC RISK SEVERITY
+# -----------------------------------------
 
+def classify_academic_risk_severity(row):
+
+    risk_count = len(row["academic_risk_reasons"])
+
+    if risk_count >= 4:
+        return "High Risk"
+
+    elif risk_count >= 1:
+        return "Moderate Risk"
+
+    else:
+        return "Low Risk"
+
+
+students["academic_risk_severity"] = students.apply(
+    classify_academic_risk_severity,
+    axis=1
+)
 
 # -----------------------------------------
 # 4. IDENTIFY PLACEMENT RISK
