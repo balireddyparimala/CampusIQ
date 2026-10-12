@@ -78,7 +78,41 @@ st.caption(
     "A data-driven prototype for student support, "
     "academic monitoring, and placement preparation."
 )
+# ==========================================
+# KEY INSIGHTS
+# ==========================================
 
+st.header("Key Insights")
+
+total_students = len(students)
+
+academic_risk_count = (
+    students["academic_risk"].eq("At Risk").sum()
+    if "academic_risk" in students.columns
+    else 0
+)
+
+placement_risk_count = (
+    students["placement_risk"].eq("At Risk").sum()
+    if "placement_risk" in students.columns
+    else 0
+)
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.metric("Total Students", total_students)
+
+with col2:
+    st.metric("Students at Academic Risk", int(academic_risk_count))
+
+with col3:
+    st.metric("Students at Placement Risk", int(placement_risk_count))
+
+st.info(
+    "Use the filters and Student Explorer below to investigate "
+    "individual students and identify suitable interventions."
+)
 st.divider()
 
 
