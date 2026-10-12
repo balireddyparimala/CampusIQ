@@ -49,6 +49,14 @@ def load_student_data(file_path):
             )
 
     if "academic_risk_severity" not in df.columns:
+    if "academic_risk" in df.columns:
+        df["academic_risk_severity"] = df["academic_risk"].map(
+            {
+                "At Risk": "Moderate Risk",
+                "Low Risk": "Low Risk",
+            }
+        ).fillna("Not Available")
+    else:
         df["academic_risk_severity"] = "Not Available"
     return df
 
