@@ -1140,7 +1140,7 @@ if not priority_students.empty:
             "each week and demonstrate the work to a faculty mentor."
         )
 
-   if action_student["communication_skills"] < 50:
+    if action_student["communication_skills"] < 50:
         placement_actions.append(
             "Communication: Practise a two-minute self-introduction daily "
             "and participate in one group discussion each week."
@@ -1155,6 +1155,7 @@ if not priority_students.empty:
         st.subheader("Placement Preparation")
         for action in placement_actions:
             st.write(f"- {action}")
+
 
     if not academic_actions and not placement_actions:
         st.info(
